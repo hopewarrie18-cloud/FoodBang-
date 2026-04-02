@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Bank | Premium Food Service</title>
+    <title>FOODBANG! | Premium Food Service</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* === Global Variables & Reset === */
         :root {
-            --primary-dark: #1a1a1a;
-            --accent-gold: #c5a059;
-            --text-light: #f9f9f9;
-            --text-dark: #333333;
-            --bg-light: #fdfdfd;
+            --bg-dark: #0f0f0f;
+            --bg-darker: #050505;
+            --accent-copper: #8b5a33;
+            --accent-hover: #a36b3f;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
         }
 
         * {
@@ -27,28 +28,68 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, .logo {
             font-family: 'Playfair Display', serif;
+        }
+
+        /* === Navigation === */
+        nav {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-copper);
         }
 
         /* === Hero Section & Slider === */
         .hero {
             position: relative;
-            height: 100vh;
+            height: 90vh;
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: center;
+            background-color: var(--bg-darker);
             overflow: hidden;
-            background-color: var(--primary-dark);
         }
 
-        .slider-container {
+        .slider-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -66,64 +107,168 @@
             opacity: 0;
             background-size: cover;
             background-position: center;
-            transition: opacity 1.5s ease-in-out;
+            transition: opacity 1.2s ease-in-out;
         }
 
         .slide.active {
             opacity: 1;
         }
 
-        /* Dark overlay to make logo pop */
-        .slider-overlay {
+        .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.1) 100%);
             z-index: 2;
         }
 
         .hero-content {
             position: relative;
             z-index: 3;
-            text-align: center;
-            color: var(--text-light);
-            padding: 0 20px;
+            max-width: 600px;
+            padding: 0 10%;
         }
 
-        .hero-logo {
-            font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+        .hero-overline {
+            font-size: 0.8rem;
             text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: block;
         }
 
-        .hero-logo span {
-            color: var(--accent-gold);
+        .hero-title {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
-        .hero-tagline {
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 4px;
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent-copper);
+            color: var(--text-main);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 0.85rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: var(--text-main);
+        }
+
+        /* === The Three Service Pillars (Alternating Layout) === */
+        .pillars-wrapper {
+            padding: 100px 10%;
+            background-color: var(--bg-dark);
+        }
+
+        .pillar-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            margin-bottom: 120px;
+        }
+
+        .pillar-row:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Alternating layout magic */
+        .pillar-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .pillar-text-col {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .pillar-overline {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-copper);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .pillar-title {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            font-weight: 500;
+        }
+
+        .pillar-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+        }
+
+        .pillar-img-col {
+            flex: 1;
+            position: relative;
+        }
+
+        .pillar-img-col img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
         /* === Floating WhatsApp Icon === */
         .whatsapp-float {
             position: fixed;
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             bottom: 40px;
             right: 40px;
             background-color: #25d366;
             color: #FFF;
             border-radius: 50px;
             text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+            font-size: 28px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
             z-index: 100;
             display: flex;
             align-items: center;
@@ -136,140 +281,67 @@
             transform: scale(1.1);
         }
 
-        /* === The Three Service Pillars === */
-        .pillars-section {
-            padding: 80px 10%;
-            text-align: center;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--primary-dark);
-        }
-
-        .pillars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        .pillar-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        .pillar-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .pillar-img-wrapper {
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .pillar-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .pillar-card:hover .pillar-img-wrapper img {
-            transform: scale(1.05);
-        }
-
-        .pillar-content {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .pillar-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary-dark);
-        }
-
-        .pillar-desc {
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .explore-btn {
-            display: inline-flex;
-            align-items: center;
-            color: var(--accent-gold);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-            width: fit-content;
-        }
-
-        .explore-btn i {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .explore-btn:hover {
-            color: var(--primary-dark);
-        }
-
-        .explore-btn:hover i {
-            transform: translateX(5px);
-        }
-
         /* === Footer === */
         footer {
-            background-color: var(--primary-dark);
-            color: var(--text-light);
+            background-color: var(--bg-darker);
+            border-top: 1px solid #222;
             text-align: center;
-            padding: 30px 20px;
-            font-size: 0.9rem;
+            padding: 40px 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
         /* === Responsive Design === */
-        @media (max-width: 768px) {
-            .hero-logo {
-                font-size: 3.5rem;
+        @media (max-width: 992px) {
+            .pillar-row, .pillar-row:nth-child(even) {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
             }
-            .pillars-section {
-                padding: 60px 5%;
+            .pillar-text-col {
+                max-width: 100%;
             }
-            .whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 25px;
-                bottom: 20px;
-                right: 20px;
+            .hero-title {
+                font-size: 3rem;
+            }
+            .nav-links {
+                display: none; /* Simplification for mobile view */
             }
         }
     </style>
 </head>
 <body>
 
+    <nav>
+        <a href="#" class="logo">FOODBANG!</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
     <header class="hero">
-        <div class="slider-container">
+        <div class="slider-bg">
             <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1513161455079-7dc1de15ef3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
         </div>
-        <div class="slider-overlay"></div>
+        
+        <div class="hero-overlay"></div>
         
         <div class="hero-content">
-            <h1 class="hero-logo">Food <span>Bank</span></h1>
-            <p class="hero-tagline">Premium & Thoughtful Catering</p>
+            <span class="hero-overline">Premium Catering</span>
+            <h1 class="hero-title">A Symphony of<br>Taste & Elegance</h1>
+            <p class="hero-desc">Elevating corporate events, thoughtful gifting, and professional lifestyles with unparalleled culinary experiences.</p>
+            <a href="#services" class="cta-btn">Explore Menu</a>
+        </div>
+
+        <div class="slider-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
         </div>
     </header>
 
@@ -277,64 +349,84 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <section class="pillars-section">
-        <h2 class="section-title">Our Signature Services</h2>
+    <section class="pillars-wrapper" id="services">
         
-        <div class="pillars-grid">
-            
-            <div class="pillar-card">
-                <div class="pillar-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate Food Boxes">
-                </div>
-                <div class="pillar-content">
-                    <h3 class="pillar-title">Corporate Excellence</h3>
-                    <p class="pillar-desc">This brand offers premium food boxes for corporate events and organizations looking to cater to distinguished guests with style and professionalism.</p>
-                    <a href="corporate-packages.html" class="explore-btn">Click Here <i class="fas fa-arrow-right"></i></a>
-                </div>
+        <div class="pillar-row">
+            <div class="pillar-text-col">
+                <span class="pillar-overline">Executive Catering</span>
+                <h2 class="pillar-title">Corporate<br>Excellence</h2>
+                <p class="pillar-desc">This brand offers premium food boxes for corporate events and organizations looking to cater to distinguished guests with style and absolute professionalism. Every detail is curated to impress.</p>
+                <a href="corporate-packages.html" class="cta-btn">Click Here</a>
             </div>
-
-            <div class="pillar-card">
-                <div class="pillar-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1543168256-4154204e4c30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Food Gift Baskets">
-                </div>
-                <div class="pillar-content">
-                    <h3 class="pillar-title">Heartfelt Gifting</h3>
-                    <p class="pillar-desc">We curate beautiful food gift baskets and boxes for those who want to send love and nourishment to family, friends, colleagues, or partners.</p>
-                    <a href="gifting-options.html" class="explore-btn">Click Here <i class="fas fa-arrow-right"></i></a>
-                </div>
+            <div class="pillar-img-col">
+                <img src="https://images.unsplash.com/photo-1505935428862-770b6f24f629?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Corporate Premium Food Boxes">
             </div>
-
-            <div class="pillar-card">
-                <div class="pillar-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Meal Prep Containers">
-                </div>
-                <div class="pillar-content">
-                    <h3 class="pillar-title">Busy Lifestyle Meal Prep</h3>
-                    <p class="pillar-desc">Designed for 9-to-5 workers and busy entrepreneurs. We handle your home meal prep with authentic Nigerian flavors so you can reclaim your time.</p>
-                    <a href="meal-prep-menu.html" class="explore-btn">Click Here <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
         </div>
+
+        <div class="pillar-row">
+            <div class="pillar-text-col">
+                <span class="pillar-overline">Thoughtful Connections</span>
+                <h2 class="pillar-title">Heartfelt<br>Gifting</h2>
+                <p class="pillar-desc">We curate beautiful food gift baskets and boxes for those who want to send love and nourishment to family, friends, colleagues, or partners. Deliver joy through the universal language of gourmet food.</p>
+                <a href="gifting-options.html" class="cta-btn">Click Here</a>
+            </div>
+            <div class="pillar-img-col">
+                <img src="https://images.unsplash.com/photo-1543168256-4154204e4c30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Elegant Food Gift Baskets">
+            </div>
+        </div>
+
+        <div class="pillar-row">
+            <div class="pillar-text-col">
+                <span class="pillar-overline">Time & Flavor Regained</span>
+                <h2 class="pillar-title">Busy Lifestyle<br>Meal Prep</h2>
+                <p class="pillar-desc">Designed exclusively for 9-to-5 corporate workers and busy entrepreneurs. We handle your home meal prep with authentic Nigerian flavors so you can reclaim your time without sacrificing your health or palate.</p>
+                <a href="meal-prep-menu.html" class="cta-btn">Click Here</a>
+            </div>
+            <div class="pillar-img-col">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Premium Nigerian Meal Prep">
+            </div>
+        </div>
+
     </section>
 
     <footer>
-        <p>&copy; 2026 Food Bank. All rights reserved.</p>
+        <p>&copy; 2026 FOODBANG! All rights reserved.</p>
     </footer>
 
     <script>
         const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
         let currentSlide = 0;
-        const slideInterval = 5000; // Change image every 5 seconds
+        let slideInterval;
 
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length; 
-            slides[currentSlide].classList.add('active');
+        function updateSlider(index) {
+            // Remove active class from all
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Add active class to current
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
         }
 
-        // Start the slider loop
-        setInterval(nextSlide, slideInterval);
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            updateSlider(nextIndex);
+        }
+
+        function goToSlide(index) {
+            clearInterval(slideInterval);
+            updateSlider(index);
+            startSlider();
+        }
+
+        function startSlider() {
+            slideInterval = setInterval(nextSlide, 5000); // 5 seconds per slide
+        }
+
+        // Initialize slider
+        startSlider();
     </script>
 </body>
 </html>
